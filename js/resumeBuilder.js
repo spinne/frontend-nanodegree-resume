@@ -75,25 +75,33 @@ var projects = {
 	"project": [
 		{
 			"title": "Online Portfolio",
-			"discription": "My online portfolio built using HTML, CSS and Bootstrap",
-			"link": "http://jielo.de",
-			"picture": "images/folio.jpg"
+			"description": "My online portfolio built using HTML, CSS and Bootstrap",
+			"date": "2015",
+			"images": [
+				"images/197x148.gif",
+				"images/197x148.gif"
+				]
 		},
 		{
 			"title": "Resume",
-			"discription": "Interactive resume built using HTML, CSS and JavaScript (jQuery)",
-			"link": "http://jielo.de",
-			"picture": "images/resume.jpg"
+			"description": "Interactive resume built using HTML, CSS and JavaScript (jQuery)",
+			"date": "2015",
+			"images": [
+				"images/197x148.gif",
+				"images/197x148.gif"
+				]
 		}
 	]
 };
 
+/* Display Name and Role in Header */
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
 var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
 
+/* Add skills list to header */
 if(bio.skills.length > 0){
 	$('#header').append(HTMLskillsStart);
 	var formattedSkill = '';
@@ -103,6 +111,7 @@ if(bio.skills.length > 0){
 	}
 };
 
+/* Function to display Work Experience */
 function displayWork(){
 	for(job in work.jobs){
 		$('#workExperience').append(HTMLworkStart);
@@ -120,6 +129,38 @@ function displayWork(){
 
 displayWork();
 
+/* Adding International Button and Function */
+function inName(){
+	var name = bio.name;
+	name = name.trim();
+	var nameArray = name.split(' ');
+	firstName = nameArray[0].slice(0,1).toUpperCase() + nameArray[0].slice(1).toLowerCase();
+	lastName = nameArray[1].toUpperCase();
+	name = firstName + ' ' + lastName;
+	return name
+}
+
+$('#main').append(internationalizeButton);
+
+/* Displaying the Project */
+projects.display = function(){
+	for(entry in projects.project){
+		$('#projects').append(HTMLprojectStart);
+		
+		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.project[entry].title);
+		var formattedDates = HTMLprojectDates.replace('%data%', projects.project[entry].date);
+		var formattedDescription = HTMLprojectDescription.replace('%data%', projects.project[entry].description);
+		
+		$('.project-entry:last').append(formattedTitle + formattedDates + formattedDescription);
+		
+		for(var i = 0; i < projects.project[entry].images.length; i ++){
+			var formattedImage = HTMLprojectImage.replace('%data%', projects.project[entry].images[i]);
+			$('.project-entry:last').append(formattedImage);
+		}
+	}
+}
+
+projects.display();
 
 /* Snippets from Lesson 1
 
