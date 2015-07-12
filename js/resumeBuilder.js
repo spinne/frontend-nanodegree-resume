@@ -196,7 +196,7 @@ education.display();
 
 
 /* Add Map */
-$('#map-div').append(googleMap);
+//$('#map-div').append(googleMap);
 
 
 /* Adding International Button and Function */
