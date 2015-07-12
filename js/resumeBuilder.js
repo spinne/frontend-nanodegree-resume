@@ -103,7 +103,22 @@ if(bio.skills.length > 0){
 	}
 };
 
+function displayWork(){
+	for(job in work.jobs){
+		$('#workExperience').append(HTMLworkStart);
+		
+		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
+		var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
+		var formattedDates = HTMLworkDates.replace('%data%', work.jobs[job].years);
+		var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[job].city);
+		var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);
+		var formattedJob = formattedEmployer + formattedTitle;
+		
+		$('.work-entry:last').append(formattedJob + formattedDates + formattedLocation + formattedDescription);
+	}
+}
 
+displayWork();
 
 
 /* Snippets from Lesson 1
