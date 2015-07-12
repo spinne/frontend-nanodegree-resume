@@ -1,6 +1,9 @@
 /*
 This is empty on purpose! Your code to build the resume will go here.
+
+Starting with my four data objects: bio, education, work, projects.
 */
+
 
 var bio = {
 	"name": "Sylvia Schmidt",
@@ -10,15 +13,16 @@ var bio = {
 			"email": "sylvia.schmidt@jielo.de",
 			"web": "sylvia.jielo.de",
 			"mobile": "0163 25 91 62 0",
+			"github": "spinne",
 			"location": "Burgbernheim"
 		}
 	],
-	"picture": "/images/picture.jpg",
-	"welcome": "Hey, I am happy you are here! Let me show you a few things:",
+	"picture": "images/social.jpg",
+	"welcome": "Hello, I am happy you are here! Take a look around.",
 	"skills": [
 		"HTML", 
 		"CSS", 
-		"JS", 
+		"JavaScript", 
 		"Photoshop", 
 		"Illustrator", 
 		"Gimp"
@@ -102,24 +106,48 @@ var projects = {
 };
 
 
-/* Display Name and Role in Header */
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+/* Function for displaying Bio information in Header and Contacts to Footer*/
+bio.display = function() {
+	
+	/* Display Name and Role in Header */
+	var formattedName = HTMLheaderName.replace("%data%", bio.name);
+	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+	var formattedPicture = HTMLbioPic.replace('%data%', bio.picture);
+	var formattedWelcome = HTMLwelcomeMsg.replace('%data%', bio.welcome);
 
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
-
-
-/* Add skills list to header */
-if(bio.skills.length > 0){
-	$('#header').append(HTMLskillsStart);
-	var formattedSkill = '';
-	for(skill in bio.skills){
-		formattedSkill = HTMLskills.replace('%data%', bio.skills[skill]);
-		$('#skills').append(formattedSkill);
+	$('#header').prepend(formattedRole);
+	$('#header').prepend(formattedName);
+	$('#header').append(formattedPicture);
+	$('#header').append(formattedWelcome);
+	
+	/* Add contacts to top and footer*/
+	if (bio.contacts.length > 0) {
+		for (entry in bio.contacts){
+			var formattedEmail = HTMLemail.replace('%data%', bio.contacts[entry].email);
+			var formattedMobile = HTMLmobile.replace('%data%', bio.contacts[entry].mobile);
+			var formattedWeb = HTMLweb.replace('%data%', bio.contacts[entry].web);
+			var formattedGithub = HTMLgithub.replace('%data%', bio.contacts[entry].github);
+			var formattedLocation = HTMLlocation.replace('%data%', bio.contacts[entry].location);
+			
+			$('#topContacts').append(formattedEmail + formattedMobile + formattedWeb + formattedGithub + formattedLocation);
+			$('#footerContacts').append(formattedEmail + formattedMobile + formattedWeb + formattedGithub + formattedLocation);
+		}
 	}
-};
+	
+	
+	
+	/* Add skills list to header */
+	if (bio.skills.length > 0) {
+		$('#header').append(HTMLskillsStart);
+		var formattedSkill = '';
+		for (skill in bio.skills) {
+			formattedSkill = HTMLskills.replace('%data%', bio.skills[skill]);
+			$('#skills').append(formattedSkill);
+		}
+	}
+}
 
+bio.display();
 
 /* Function to display Work Experience */
 work.display = function() {
@@ -141,8 +169,8 @@ work.display();
 
 
 /* Displaying the Project */
-projects.display = function(){
-	for(entry in projects.project){
+projects.display = function() {
+	for(entry in projects.project) {
 		$('#projects').append(HTMLprojectStart);
 		
 		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.project[entry].title);
@@ -151,7 +179,7 @@ projects.display = function(){
 		
 		$('.project-entry:last').append(formattedTitle + formattedDates + formattedDescription);
 		
-		for(var i = 0; i < projects.project[entry].images.length; i ++){
+		for (var i = 0; i < projects.project[entry].images.length; i ++) {
 			var formattedImage = HTMLprojectImage.replace('%data%', projects.project[entry].images[i]);
 			$('.project-entry:last').append(formattedImage);
 		}
@@ -175,7 +203,7 @@ education.display = function() {
 		
 		$('.education-entry:last').append(formattedSchool + formattedDates + formattedLocation + formattedMajor);
 	}
-	if (education.online.length > 0){
+	if (education.online.length > 0) {
 		$('#education').append(HTMLonlineClasses);
 		
 		for (school in education.online) {
@@ -200,7 +228,7 @@ education.display();
 
 
 /* Adding International Button and Function */
-function inName(){
+function inName() {
 	var name = bio.name;
 	name = name.trim();
 	var nameArray = name.split(' ');
