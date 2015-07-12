@@ -5,30 +5,38 @@ This is empty on purpose! Your code to build the resume will go here.
 var bio = {
 	"name": "Sylvia Schmidt",
 	"role": "Frontend Web Developer",
-	"contact": [
+	"contacts": [
 		{
 			"email": "sylvia.schmidt@jielo.de",
 			"web": "sylvia.jielo.de",
-			"mobile": "0163 25 91 62 0"
+			"mobile": "0163 25 91 62 0",
+			"location": "Burgbernheim"
 		}
 	],
 	"picture": "/images/picture.jpg",
 	"welcome": "Hey, I am happy you are here! Let me show you a few things:",
-	"skills": ["HTML", "CSS", "JS", "Photoshop", "Illustrator", "Gimp"]
+	"skills": [
+		"HTML", 
+		"CSS", 
+		"JS", 
+		"Photoshop", 
+		"Illustrator", 
+		"Gimp"
+	]
 };
 
 var education = {
 	"schools": [
 		{
 			"name": "HAW Amberg-Weiden",
-			"city": "Amberg",
+			"location": "Amberg",
 			"years": "2006-2010",
 			"degree": "Bachelor of Engineering",
 			"major": "Media Production and Technology"
 		},
 		{
 			"name": "HAW Amberg-Weiden",
-			"city": "Amberg",
+			"location": "Amberg",
 			"years": "2010-2012",
 			"degree": "Master of Engineering",
 			"major": "Media Production and Technology"
@@ -36,11 +44,10 @@ var education = {
 	],
 	"online": [
 		{
-			"name": "Udacity",
-			"city": "Online",
+			"title": "Nanodegree Frontend Web Development",
+			"school": "Udacity",
 			"years": "2015",
-			"degree": "Nanodegree",
-			"major": "Frontend Web Development"
+			"url": "http://www.udacity.com"
 		}
 	]
 };
@@ -49,21 +56,21 @@ var work = {
 	"jobs": [
 		{
 			"employer": "Hotel-Gasthof Goldener Greifen",
-			"city": "Rothenburg ob der Tauber",
+			"location": "Rothenburg ob der Tauber",
 			"years": "2013 - Today",
 			"title": "Hotel Staff",
 			"description": "Something"
 		},
 		{
 			"employer": "Agentur Frischdenker",
-			"city": "Hersbruck",
+			"location": "Hersbruck",
 			"years": "2008-2009",
 			"title": "Intern",
 			"description": "Something"
 		},
 		{
 			"employer": "AdRoom GmbH",
-			"city": "Bad Windsheim",
+			"location": "Bad Windsheim",
 			"years": "2008",
 			"title": "Intern",
 			"description": "Something"
@@ -94,12 +101,14 @@ var projects = {
 	]
 };
 
+
 /* Display Name and Role in Header */
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
 var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
+
 
 /* Add skills list to header */
 if(bio.skills.length > 0){
@@ -111,15 +120,16 @@ if(bio.skills.length > 0){
 	}
 };
 
+
 /* Function to display Work Experience */
-function displayWork(){
-	for(job in work.jobs){
+work.display = function() {
+	for (job in work.jobs) {
 		$('#workExperience').append(HTMLworkStart);
 		
 		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
 		var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
 		var formattedDates = HTMLworkDates.replace('%data%', work.jobs[job].years);
-		var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[job].city);
+		var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[job].location);
 		var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);
 		var formattedJob = formattedEmployer + formattedTitle;
 		
@@ -127,20 +137,8 @@ function displayWork(){
 	}
 }
 
-displayWork();
+work.display();
 
-/* Adding International Button and Function */
-function inName(){
-	var name = bio.name;
-	name = name.trim();
-	var nameArray = name.split(' ');
-	firstName = nameArray[0].slice(0,1).toUpperCase() + nameArray[0].slice(1).toLowerCase();
-	lastName = nameArray[1].toUpperCase();
-	name = firstName + ' ' + lastName;
-	return name
-}
-
-$('#main').append(internationalizeButton);
 
 /* Displaying the Project */
 projects.display = function(){
@@ -161,6 +159,59 @@ projects.display = function(){
 }
 
 projects.display();
+
+
+/* Function to display Education */
+education.display = function() {
+	for (school in education.schools) {
+		$('#education').append(HTMLschoolStart);
+		
+		var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
+		var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[school].degree);
+		var formattedDates = HTMLschoolDates.replace('%data%', education.schools[school].years);
+		var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[school].location);
+		var formattedMajor = HTMLschoolMajor.replace('%data%', education.schools[school].major);
+		var formattedSchool = formattedName + formattedDegree;
+		
+		$('.education-entry:last').append(formattedSchool + formattedDates + formattedLocation + formattedMajor);
+	}
+	if (education.online.length > 0){
+		$('#education').append(HTMLonlineClasses);
+		
+		for (school in education.online) {
+			$('#education').append(HTMLschoolStart);
+			
+			var formattedTitle = HTMLonlineTitle.replace('%data%', education.online[school].title);
+			var formattedSchool = HTMLonlineSchool.replace('%data%', education.online[school].school);
+			var formattedDates = HTMLonlineDates.replace('%data%', education.online[school].years);
+			var formattedURL = HTMLonlineURL.replace('%data%', education.online[school].url);
+			var formattedClass = formattedTitle + formattedSchool;
+			
+			$('.education-entry:last').append(formattedClass + formattedDates + formattedURL);
+		}
+	}
+}
+
+education.display();
+
+
+/* Add Map */
+$('#map-div').append(googleMap);
+
+
+/* Adding International Button and Function */
+function inName(){
+	var name = bio.name;
+	name = name.trim();
+	var nameArray = name.split(' ');
+	firstName = nameArray[0].slice(0,1).toUpperCase() + nameArray[0].slice(1).toLowerCase();
+	lastName = nameArray[1].toUpperCase();
+	name = firstName + ' ' + lastName;
+	return name
+}
+
+$('#main').append(internationalizeButton);
+
 
 /* Snippets from Lesson 1
 
