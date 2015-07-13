@@ -49,7 +49,7 @@ bio.display = function() {
 
 	/* Add contacts to top and footer*/
 	if (bio.contacts.length > 0) {
-		for (entry in bio.contacts){
+		for (var entry in bio.contacts){
 			var formattedEmail = HTMLemail.replace('%data%', bio.contacts[entry].email);
 			var formattedMobile = HTMLmobile.replace('%data%', bio.contacts[entry].mobile);
 			var formattedTwitter = HTMLtwitter.replace('%data%', bio.contacts[entry].twitter);
@@ -66,7 +66,7 @@ bio.display = function() {
 	if (bio.skills.length > 0) {
 		$('#header').append(HTMLskillsStart);
 		var formattedSkill = '';
-		for (skill in bio.skills) {
+		for (var skill in bio.skills) {
 			formattedSkill = HTMLskills.replace('%data%', bio.skills[skill]);
 			$('#skills').append(formattedSkill);
 		}
@@ -106,7 +106,7 @@ var education = {
 
 /* Function to display Education */
 education.display = function() {
-	for (school in education.schools) {
+	for (var school in education.schools) {
 		$('#education').append(HTMLschoolStart);
 
 		var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
@@ -121,7 +121,7 @@ education.display = function() {
 	if (education.online.length > 0) {
 		$('#education').append(HTMLonlineClasses);
 
-		for (school in education.online) {
+		for (var school in education.online) {
 			$('#education').append(HTMLschoolStart);
 
 			var formattedTitle = HTMLonlineTitle.replace('%data%', education.online[school].title);
@@ -142,28 +142,28 @@ education.display();
 var work = {
 	"jobs": [
 		{
-			"employer": "Hotel-Gasthof Goldener Greifen",
+			"employer": "A Hotel",
 			"location": "Rothenburg ob der Tauber",
 			"dates": "2013 - Today",
 			"title": "Hotel Staff",
 			"description": "Something"
 		},
 		{
-			"employer": "Agentur Frischdenker",
+			"employer": "An Agency",
 			"location": "Hersbruck",
 			"dates": "2008-2009",
 			"title": "Intern",
 			"description": "Something"
 		},
 		{
-			"employer": "AdRoom GmbH",
+			"employer": "A Company",
 			"location": "Bad Windsheim",
 			"dates": "2007",
 			"title": "Intern",
 			"description": "Something"
 		},
 		{
-			"employer": "IWT Wickeltechnik GmbH",
+			"employer": "A Company",
 			"location": "Eltersdorf",
 			"dates": "2006",
 			"title": "Intern",
@@ -174,7 +174,7 @@ var work = {
 
 /* Function to display Work Experience */
 work.display = function() {
-	for (job in work.jobs) {
+	for (var job in work.jobs) {
 		$('#workExperience').append(HTMLworkStart);
 
 		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
@@ -217,7 +217,7 @@ var projects = {
 
 /* Function to display Projects */
 projects.display = function() {
-	for(entry in projects.project) {
+	for (var entry in projects.project) {
 		$('#projects').append(HTMLprojectStart);
 
 		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.project[entry].title);
@@ -238,6 +238,24 @@ projects.display();
 
 /* Add Map */
 $('#map-div').append(googleMap);
+
+
+/* Additional Interaction: Accordion Function of sections */
+$('#workExperience').click(function(){
+	$(this, 'h2').toggleClass('closed');
+	$('.work-entry').toggle();
+});
+
+$('#projects').click(function(){
+	$(this, 'h2').toggleClass('closed');
+	$('.project-entry').toggle();
+});
+
+$('#education').click(function(){
+	$(this, 'h2').toggleClass('closed');
+	$('div#education > h3').toggle();
+	$('.education-entry').toggle();
+});
 
 
 /* Adding International Button and Function */
