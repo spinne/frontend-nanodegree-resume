@@ -241,24 +241,34 @@ $('#map-div').append(googleMap);
 
 
 /* Additional Interaction: Accordion Function of sections */
+$('#workExperience > h2').addClass('accordion').append('<span class="closeMarker closed"> ˅ </span>').append('<span class="closeMarker"> x </span>');
 $('#workExperience').click(function(){
-	$(this, 'h2').toggleClass('closed');
+	$('#workExperience > h2 > span').toggleClass('closed');
 	$('.work-entry').toggle();
 });
 
+$('#projects > h2').addClass('accordion').append('<span class="closeMarker closed"> ˅ </span>').append('<span class="closeMarker"> x </span>');
 $('#projects').click(function(){
-	$(this, 'h2').toggleClass('closed');
+	$('#projects > h2 > span').toggleClass('closed');
 	$('.project-entry').toggle();
 });
 
+$('#education > h2').addClass('accordion').append('<span class="closeMarker closed"> ˅ </span>').append('<span class="closeMarker"> x </span>');
 $('#education').click(function(){
-	$(this, 'h2').toggleClass('closed');
+	$('#education > h2 > span').toggleClass('closed');
 	$('div#education > h3').toggle();
 	$('.education-entry').toggle();
 });
 
 
-/* Adding International Button and Function */
+/*Adding elements and classes to change layout + look with CSS */
+$('head').append('<link href="http://fonts.googleapis.com/css?family=Lato|Merriweather:300" rel="stylesheet">');
+
+$('#header > span').addClass('subtitle');
+
+
+/* Adding International Button and Function  - Commented out because I don' want to use it*/
+/*
 function inName() {
 	var name = bio.name;
 	name = name.trim();
@@ -270,3 +280,4 @@ function inName() {
 }
 
 $('#main').append(internationalizeButton);
+*/
