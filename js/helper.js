@@ -65,7 +65,7 @@ The International Name challenge in Lesson 2 where you'll create a function that
 $(document).ready(function() {
   $('button').click(function() {
     var iName = inName() || function(){};
-    $('#name').html(iName);  
+    $('#name').html(iName);
   });
 });
 
@@ -178,12 +178,12 @@ function initializeMap() {
 					occupation = 'work';
 				} else if (place[0] === work.jobs[i].location){
 					occupation = 'worked';
-				} 
+				}
 			}
 		}
 		return occupation;
 	};
-	
+
 	var contentString = '<div id="content">'+
 		'<h4>'+
 		'I '+
@@ -192,7 +192,7 @@ function initializeMap() {
 		'</h4><p>'+
 		name +
 		'</p></div>';
-		
+
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });

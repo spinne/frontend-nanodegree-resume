@@ -170,7 +170,7 @@ span {
 .closed{
 	display: none;
 	}
-	
+
 .closeMarker{
 	float: right;
 }
@@ -188,24 +188,24 @@ span {
 		font: 300 2.25em/1em "Merriweather", serif;
 		display:block;
 	}
-	
+
 	#skills-h3 {
 		font: 1.25em/1.25em "Lato", sans-serif;
 		text-align: center;
 		margin: 0;
 		padding: 0;
 	}
-	
+
 	#lets-connect {
 		margin-top: 10%;
 	}
-	
+
 	.welcome-message {
 		display: none;
 	}
 }
 
-@media only screen and (min-width: 750px) {	
+@media only screen and (min-width: 750px) {
 	.biopic {
 		float: left;
 		margin: 0 10px 0 0;
