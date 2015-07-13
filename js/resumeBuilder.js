@@ -7,7 +7,7 @@ I am declaring the property and functions outside the original objects.
 (As shown in JavaScrip Basics.)
 */
 
-
+/* Bio Object */
 var bio = {
 	"name": "Sylvia Schmidt",
 	"role": "Frontend Web Developer",
@@ -31,90 +31,6 @@ var bio = {
 	],
 	"biopic": "images/social.jpg"
 };
-
-var education = {
-	"schools": [
-		{
-			"name": "HAW Amberg-Weiden",
-			"location": "Amberg",
-			"dates": 2010,
-			"degree": "Bachelor of Engineering",
-			"major": "Media Production and Technology"
-		},
-		{
-			"name": "HAW Amberg-Weiden",
-			"location": "Amberg",
-			"dates": 2012,
-			"degree": "Master of Engineering",
-			"major": "Media Production and Technology"
-		}
-	],
-	"online": [
-		{
-			"title": "Nanodegree Frontend Web Development",
-			"school": "Udacity",
-			"date": "2015",
-			"url": "http://www.udacity.com"
-		}
-	]
-};
-
-var work = {
-	"jobs": [
-		{
-			"employer": "Hotel-Gasthof Goldener Greifen",
-			"location": "Rothenburg ob der Tauber",
-			"dates": "2013 - Today",
-			"title": "Hotel Staff",
-			"description": "Something"
-		},
-		{
-			"employer": "Agentur Frischdenker",
-			"location": "Hersbruck",
-			"dates": "2008-2009",
-			"title": "Intern",
-			"description": "Something"
-		},
-		{
-			"employer": "AdRoom GmbH",
-			"location": "Bad Windsheim",
-			"dates": "2007",
-			"title": "Intern",
-			"description": "Something"
-		},
-		{
-			"employer": "IWT Wickeltechnik GmbH",
-			"location": "Eltersdorf",
-			"dates": "2006",
-			"title": "Intern",
-			"description": "Something"
-		}
-	]
-};
-
-var projects = {
-	"project": [
-		{
-			"title": "Online Portfolio",
-			"description": "My online portfolio built using HTML, CSS and Bootstrap",
-			"dates": "2015",
-			"images": [
-				"images/197x148.gif",
-				"images/197x148.gif"
-				]
-		},
-		{
-			"title": "Resume",
-			"description": "Interactive resume built using HTML, CSS and JavaScript (jQuery)",
-			"dates": "2015",
-			"images": [
-				"images/197x148.gif",
-				"images/197x148.gif"
-				]
-		}
-	]
-};
-
 
 /* Function for displaying Bio information in Header and Contacts to Footer*/
 bio.display = function() {
@@ -159,45 +75,34 @@ bio.display = function() {
 
 bio.display();
 
-/* Function to display Work Experience */
-work.display = function() {
-	for (job in work.jobs) {
-		$('#workExperience').append(HTMLworkStart);
 
-		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
-		var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
-		var formattedDates = HTMLworkDates.replace('%data%', work.jobs[job].dates);
-		var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[job].location);
-		var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);
-		var formattedJob = formattedEmployer + formattedTitle;
-
-		$('.work-entry:last').append(formattedJob + formattedDates + formattedLocation + formattedDescription);
-	}
-}
-
-work.display();
-
-
-/* Function to display Projects */
-projects.display = function() {
-	for(entry in projects.project) {
-		$('#projects').append(HTMLprojectStart);
-
-		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.project[entry].title);
-		var formattedDates = HTMLprojectDates.replace('%data%', projects.project[entry].dates);
-		var formattedDescription = HTMLprojectDescription.replace('%data%', projects.project[entry].description);
-
-		$('.project-entry:last').append(formattedTitle + formattedDates + formattedDescription);
-
-		for (var i = 0; i < projects.project[entry].images.length; i ++) {
-			var formattedImage = HTMLprojectImage.replace('%data%', projects.project[entry].images[i]);
-			$('.project-entry:last').append(formattedImage);
+/* Education Object */
+var education = {
+	"schools": [
+		{
+			"name": "HAW Amberg-Weiden",
+			"location": "Amberg",
+			"dates": 2010,
+			"degree": "Bachelor of Engineering",
+			"major": "Media Production and Technology"
+		},
+		{
+			"name": "HAW Amberg-Weiden",
+			"location": "Amberg",
+			"dates": 2012,
+			"degree": "Master of Engineering",
+			"major": "Media Production and Technology"
 		}
-	}
-}
-
-projects.display();
-
+	],
+	"online": [
+		{
+			"title": "Nanodegree Frontend Web Development",
+			"school": "Udacity",
+			"date": "2015",
+			"url": "http://www.udacity.com"
+		}
+	]
+};
 
 /* Function to display Education */
 education.display = function() {
@@ -231,6 +136,104 @@ education.display = function() {
 }
 
 education.display();
+
+
+/* Work Object */
+var work = {
+	"jobs": [
+		{
+			"employer": "Hotel-Gasthof Goldener Greifen",
+			"location": "Rothenburg ob der Tauber",
+			"dates": "2013 - Today",
+			"title": "Hotel Staff",
+			"description": "Something"
+		},
+		{
+			"employer": "Agentur Frischdenker",
+			"location": "Hersbruck",
+			"dates": "2008-2009",
+			"title": "Intern",
+			"description": "Something"
+		},
+		{
+			"employer": "AdRoom GmbH",
+			"location": "Bad Windsheim",
+			"dates": "2007",
+			"title": "Intern",
+			"description": "Something"
+		},
+		{
+			"employer": "IWT Wickeltechnik GmbH",
+			"location": "Eltersdorf",
+			"dates": "2006",
+			"title": "Intern",
+			"description": "Something"
+		}
+	]
+};
+
+/* Function to display Work Experience */
+work.display = function() {
+	for (job in work.jobs) {
+		$('#workExperience').append(HTMLworkStart);
+
+		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
+		var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
+		var formattedDates = HTMLworkDates.replace('%data%', work.jobs[job].dates);
+		var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[job].location);
+		var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);
+		var formattedJob = formattedEmployer + formattedTitle;
+
+		$('.work-entry:last').append(formattedJob + formattedDates + formattedLocation + formattedDescription);
+	}
+}
+
+work.display();
+
+
+/* Projects Object */
+var projects = {
+	"project": [
+		{
+			"title": "Online Portfolio",
+			"description": "My online portfolio built using HTML, CSS and Bootstrap",
+			"dates": "2015",
+			"images": [
+				"images/197x148.gif",
+				"images/197x148.gif"
+				]
+		},
+		{
+			"title": "Resume",
+			"description": "Interactive resume built using HTML, CSS and JavaScript (jQuery)",
+			"dates": "2015",
+			"images": [
+				"images/197x148.gif",
+				"images/197x148.gif"
+				]
+		}
+	]
+};
+
+/* Function to display Projects */
+projects.display = function() {
+	for(entry in projects.project) {
+		$('#projects').append(HTMLprojectStart);
+
+		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.project[entry].title);
+		var formattedDates = HTMLprojectDates.replace('%data%', projects.project[entry].dates);
+		var formattedDescription = HTMLprojectDescription.replace('%data%', projects.project[entry].description);
+
+		$('.project-entry:last').append(formattedTitle + formattedDates + formattedDescription);
+
+		for (var i = 0; i < projects.project[entry].images.length; i ++) {
+			var formattedImage = HTMLprojectImage.replace('%data%', projects.project[entry].images[i]);
+			$('.project-entry:last').append(formattedImage);
+		}
+	}
+}
+
+projects.display();
 
 
 /* Add Map */
