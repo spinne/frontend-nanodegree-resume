@@ -2,6 +2,9 @@
 This is empty on purpose! Your code to build the resume will go here.
 
 Starting with my four data objects: bio, education, work, projects.
+While all objects contain an encapsulated "display" property,
+I am declaring the property and functions outside the original objects.
+(As shown in JavaScrip Basics.)
 */
 
 
@@ -10,15 +13,14 @@ var bio = {
 	"role": "Frontend Web Developer",
 	"contacts": [
 		{
+			"mobile": "0163 25 xx 62 0",
 			"email": "sylvia.schmidt@jielo.de",
-			"web": "sylvia.jielo.de",
-			"mobile": "0163 25 91 62 0",
 			"github": "spinne",
+			"twitter": "None",
 			"location": "Burgbernheim"
 		}
 	],
-	"picture": "images/social.jpg",
-	"welcome": "Hello, I am happy you are here! Take a look around.",
+	"welcomeMessage": "Hello, I am happy you are here! Take a look around.",
 	"skills": [
 		"HTML",
 		"CSS",
@@ -26,7 +28,8 @@ var bio = {
 		"Photoshop",
 		"Illustrator",
 		"Gimp"
-	]
+	],
+	"biopic": "images/social.jpg"
 };
 
 var education = {
@@ -34,14 +37,14 @@ var education = {
 		{
 			"name": "HAW Amberg-Weiden",
 			"location": "Amberg",
-			"years": "2006-2010",
+			"dates": 2010,
 			"degree": "Bachelor of Engineering",
 			"major": "Media Production and Technology"
 		},
 		{
 			"name": "HAW Amberg-Weiden",
 			"location": "Amberg",
-			"years": "2010-2012",
+			"dates": 2012,
 			"degree": "Master of Engineering",
 			"major": "Media Production and Technology"
 		}
@@ -50,7 +53,7 @@ var education = {
 		{
 			"title": "Nanodegree Frontend Web Development",
 			"school": "Udacity",
-			"years": "2015",
+			"date": "2015",
 			"url": "http://www.udacity.com"
 		}
 	]
@@ -61,28 +64,28 @@ var work = {
 		{
 			"employer": "Hotel-Gasthof Goldener Greifen",
 			"location": "Rothenburg ob der Tauber",
-			"years": "2013 - Today",
+			"dates": "2013 - Today",
 			"title": "Hotel Staff",
 			"description": "Something"
 		},
 		{
 			"employer": "Agentur Frischdenker",
 			"location": "Hersbruck",
-			"years": "2008-2009",
+			"dates": "2008-2009",
 			"title": "Intern",
 			"description": "Something"
 		},
 		{
 			"employer": "AdRoom GmbH",
 			"location": "Bad Windsheim",
-			"years": "2007",
+			"dates": "2007",
 			"title": "Intern",
 			"description": "Something"
 		},
 		{
 			"employer": "IWT Wickeltechnik GmbH",
 			"location": "Eltersdorf",
-			"years": "2006",
+			"dates": "2006",
 			"title": "Intern",
 			"description": "Something"
 		}
@@ -94,7 +97,7 @@ var projects = {
 		{
 			"title": "Online Portfolio",
 			"description": "My online portfolio built using HTML, CSS and Bootstrap",
-			"date": "2015",
+			"dates": "2015",
 			"images": [
 				"images/197x148.gif",
 				"images/197x148.gif"
@@ -103,7 +106,7 @@ var projects = {
 		{
 			"title": "Resume",
 			"description": "Interactive resume built using HTML, CSS and JavaScript (jQuery)",
-			"date": "2015",
+			"dates": "2015",
 			"images": [
 				"images/197x148.gif",
 				"images/197x148.gif"
@@ -119,8 +122,8 @@ bio.display = function() {
 	/* Display Name, Role, Picture and Welcome Massage in Header */
 	var formattedName = HTMLheaderName.replace("%data%", bio.name);
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-	var formattedPicture = HTMLbioPic.replace('%data%', bio.picture);
-	var formattedWelcome = HTMLwelcomeMsg.replace('%data%', bio.welcome);
+	var formattedPicture = HTMLbioPic.replace('%data%', bio.biopic);
+	var formattedWelcome = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
 
 	$('#header').prepend(formattedRole);
 	$('#header').prepend(formattedName);
@@ -133,12 +136,12 @@ bio.display = function() {
 		for (entry in bio.contacts){
 			var formattedEmail = HTMLemail.replace('%data%', bio.contacts[entry].email);
 			var formattedMobile = HTMLmobile.replace('%data%', bio.contacts[entry].mobile);
-			var formattedWeb = HTMLweb.replace('%data%', bio.contacts[entry].web);
+			var formattedTwitter = HTMLtwitter.replace('%data%', bio.contacts[entry].twitter);
 			var formattedGithub = HTMLgithub.replace('%data%', bio.contacts[entry].github);
 			var formattedLocation = HTMLlocation.replace('%data%', bio.contacts[entry].location);
 
-			$('#topContacts').append(formattedEmail + formattedMobile + formattedWeb + formattedGithub + formattedLocation);
-			$('#footerContacts').append(formattedEmail + formattedMobile + formattedWeb + formattedGithub + formattedLocation);
+			$('#topContacts').append(formattedEmail + formattedMobile + formattedTwitter + formattedGithub + formattedLocation);
+			$('#footerContacts').append(formattedEmail + formattedMobile + formattedTwitter + formattedGithub + formattedLocation);
 		}
 	}
 
@@ -163,7 +166,7 @@ work.display = function() {
 
 		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
 		var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
-		var formattedDates = HTMLworkDates.replace('%data%', work.jobs[job].years);
+		var formattedDates = HTMLworkDates.replace('%data%', work.jobs[job].dates);
 		var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[job].location);
 		var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);
 		var formattedJob = formattedEmployer + formattedTitle;
@@ -175,13 +178,13 @@ work.display = function() {
 work.display();
 
 
-/* Displaying the Project */
+/* Function to display Projects */
 projects.display = function() {
 	for(entry in projects.project) {
 		$('#projects').append(HTMLprojectStart);
 
 		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.project[entry].title);
-		var formattedDates = HTMLprojectDates.replace('%data%', projects.project[entry].date);
+		var formattedDates = HTMLprojectDates.replace('%data%', projects.project[entry].dates);
 		var formattedDescription = HTMLprojectDescription.replace('%data%', projects.project[entry].description);
 
 		$('.project-entry:last').append(formattedTitle + formattedDates + formattedDescription);
@@ -203,7 +206,7 @@ education.display = function() {
 
 		var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
 		var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[school].degree);
-		var formattedDates = HTMLschoolDates.replace('%data%', education.schools[school].years);
+		var formattedDates = HTMLschoolDates.replace('%data%', education.schools[school].dates);
 		var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[school].location);
 		var formattedMajor = HTMLschoolMajor.replace('%data%', education.schools[school].major);
 		var formattedSchool = formattedName + formattedDegree;
@@ -218,7 +221,7 @@ education.display = function() {
 
 			var formattedTitle = HTMLonlineTitle.replace('%data%', education.online[school].title);
 			var formattedSchool = HTMLonlineSchool.replace('%data%', education.online[school].school);
-			var formattedDates = HTMLonlineDates.replace('%data%', education.online[school].years);
+			var formattedDates = HTMLonlineDates.replace('%data%', education.online[school].date);
 			var formattedURL = HTMLonlineURL.replace('%data%', education.online[school].url);
 			var formattedClass = formattedTitle + formattedSchool;
 
@@ -246,32 +249,3 @@ function inName() {
 }
 
 $('#main').append(internationalizeButton);
-
-
-/* Snippets from Lesson 1
-
-$("#main").append(bio.name);
-$("#main").append(work["position"]);
-$("#main").append(education.name);
-
-
-var work = {};
-work.position = "Hotel Staff";
-work.employer = "Hotel-Gasthof Goldener Greifen";
-work.years = "2013 - today";
-work.city = "Rothenburg o. d. Tauber";
-
-var education = {};
-education["name"] = "HAW Amberg-Weiden";
-education["years"] = "2010-2012";
-education["city"] = "Amberg";
-
-$("#main").append("Sylvia");
-var awsomeThoughts = "I am Sylvia and I am AWESOME!";
-console.log(awsomeThoughts);
-
-var funThoughts = awsomeThoughts.replace("AWESOME", "fun");
-$("#main").append(funThoughts);
-$("#main").append(awsomeThoughts);
-
-*/
