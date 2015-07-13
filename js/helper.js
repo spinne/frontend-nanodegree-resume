@@ -164,13 +164,41 @@ function initializeMap() {
     // infoWindows are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
+	/* Adding a function and variable to change the content of the infoWindows */
+	function activity(){
+		var occupation = 'went to University';
+		var place = name;
+		place = place.split(',');
+		if (place[0] === bio.contacts[0].location) {
+			occupation = 'live';
+		} else {
+			for (var i = 0; i < work.jobs.length; i++) {
+				var date = work.jobs[i].dates.split(' - ');
+				if (place[0] === work.jobs[i].location && date[1] === 'Today') {
+					occupation = 'work';
+				} else if (place[0] === work.jobs[i].location){
+					occupation = 'worked';
+				} 
+			}
+		}
+		return occupation;
+	};
+	
+	var contentString = '<div id="content">'+
+		'<h4>'+
+		'I '+
+		activity() +
+		' here!'+
+		'</h4><p>'+
+		name +
+		'</p></div>';
+		
     var infowindow = new google.maps.InfoWindow({
-      content: name
+      content: contentString
     });
 
-    // hmmmm, I wonder what this is about...
+    // hmmmm, I wonder what this is about... about infoWindows :-)
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!  
 	  infowindow.open(map, marker);
     });
 
