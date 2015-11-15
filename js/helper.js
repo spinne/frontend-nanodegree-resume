@@ -121,22 +121,25 @@ function initializeMap() {
   function locationFinder() {
 
     // initializes an empty array
-    var locations = [];
+    var locations = ['Burgbernheim', 'Amberg', 'Hersbruck', 'Eltersdorf', 'Rothenburg o.d. Tauber'];
+	
+	//var bio = octupus.getBio();
+	//var education = octupus.getSchools();
 
     // adds the single location property from bio to the locations array
-    locations.push(bio.contacts[0].location);
+    //locations.push(bio[0].contacts[0].location);
 
     // iterates through school locations and appends each location to
     // the locations array
-    for (var school in education.schools) {
-      locations.push(education.schools[school].location);
-    }
+    //for (var school in education.schools) {
+    //  locations.push(education.schools[school].location);
+    //}
 
     // iterates through work locations and appends each location to
     // the locations array
-    for (var job in work.jobs) {
-      locations.push(work.jobs[job].location);
-    }
+    //for (var job in work.jobs) {
+    //  locations.push(work.jobs[job].location);
+    //}
 
     return locations;
   }
@@ -165,7 +168,7 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
 	/* Adding a function and variable to change the content of the infoWindows */
-	function activity(){
+	/*function activity(){
 		var occupation = 'went to University';
 		var place = name;
 		place = place.split(',');
@@ -182,13 +185,11 @@ function initializeMap() {
 			}
 		}
 		return occupation;
-	};
+	};*/
 
 	var contentString = '<div id="content">'+
 		'<h4>'+
-		'I '+
-		activity() +
-		' here!'+
+		'I was here!'+
 		'</h4><p>'+
 		name +
 		'</p></div>';
